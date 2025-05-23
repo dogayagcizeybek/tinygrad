@@ -8,7 +8,8 @@ class TestPickle(unittest.TestCase):
   def test_pickle_code_object(self):
     y = lambda x: x*2  # noqa: E731
     code_str = pickle.dumps(y.__code__)
-    fxn = lambda *args, **kwargs: None
+    def fxn(*args, **kwargs):
+      return None
     code_obj = pickle.loads(code_str)
     temp_f = types.FunctionType(code_obj, globals())
     if callable(temp_f):
